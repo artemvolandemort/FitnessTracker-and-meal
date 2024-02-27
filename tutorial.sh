@@ -17,6 +17,12 @@ fi
     exit 1
   fi
 
+    # read permissions?
+    if [[ ! -r "${CHK_FILE}" ]]; then
+      printf "\033[31mError: No read permissions for '%s' (run as root).\033[m\n\n" "${CHK_FILE}"
+      exit 1
+    fi
+
 if [ $WILL_RECOVER -eq 0 ];
 then
     KEY_INFO=$(pylonsd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO)
